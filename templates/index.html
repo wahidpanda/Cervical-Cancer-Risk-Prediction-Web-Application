@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervical Cancer Information & Risk Assessment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --pink-accent: #e83e8c;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(58, 78, 181, 0.9) 0%, rgba(26, 115, 232, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .info-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            height: 100%;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .assessment-section {
+            background-color: white;
+            padding: 4rem 0;
+        }
+        
+        /* Assessment form styles */
+        .form-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-container {
+            display: none;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .risk-high {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        
+        .risk-low {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .progress {
+            height: 25px;
+            margin: 1.5rem 0;
+            border-radius: 50px;
+        }
+        
+        .progress-bar {
+            border-radius: 50px;
+            position: relative;
+            transition: width 1.5s ease;
+        }
+        
+        .feature-group {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--secondary-color);
+            padding: 12px 20px;
+        }
+        
+        .risk-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .risk-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2.5rem 0;
+        }
+        
+        .img-thumbnail {
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-ribbon me-2" style="color: var(--pink-accent);"></i>
+                <span style="font-weight: 600;">CervicalCancerAware</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#risk-factors">Risk Factors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prevention">Prevention</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#assessment">Assessment</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Cervical Cancer Awareness</h1>
+            <p class="lead mb-5">Knowledge, prevention, and early detection save lives</p>
+            <a href="#assessment" class="btn btn-light btn-lg me-3">
+                <i class="fas fa-chart-line me-2"></i>Risk Assessment
+            </a>
+            <a href="#prevention" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-shield-alt me-2"></i>Prevention Tips
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="fw-bold">What is Cervical Cancer?</h2>
+                    <p class="lead text-muted">Understanding the basics</p>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                         alt="Cervical cancer illustration" class="img-fluid img-thumbnail">
+                </div>
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h3><i class="fas fa-info-circle text-primary me-2"></i>Overview</h3>
+                        <p>Cervical cancer occurs in the cells of the cervix — the lower part of the uterus that connects to the vagina. Various strains of the human papillomavirus (HPV), a sexually transmitted infection, play a role in causing most cervical cancer.</p>
+                        <p>When exposed to HPV, a woman's immune system typically prevents the virus from doing harm. However, in a small percentage of women, the virus survives for years, contributing to the process that causes some cervical cells to become cancer cells.</p>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Did you know?</strong> Cervical cancer is one of the most preventable and treatable forms of cancer when detected early.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Factors Section -->
+    <section id="risk-factors" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="fw-bold">Risk Factors</h2>
+                    <p class="lead text-muted">What increases your risk of cervical cancer</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <h3><i class="fas fa-virus text-danger me-2"></i>HPV Infection</h3>
+                        <p>Human papillomavirus (HPV) infection is the most important risk factor for cervical cancer. HPV is a group of more than 150 related viruses, some of which can cause cancer.</p>
+                        <p>About 14 HPV types are considered high-risk for cervical cancer. The most concerning are HPV 16 and 18, which cause about 70% of cervical cancers worldwide.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <h3><i class="fas fa-smoking text-secondary me-2"></i>Smoking</h3>
+                        <p>Women who smoke are about twice as likely to develop cervical cancer as non-smokers. Tobacco by-products damage cervical cells' DNA and contribute to cancer development.</p>
+                        <p>Smoking also makes the immune system less effective at fighting HPV infections.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <h3><i class="fas fa-pills text-primary me-2"></i>Contraceptives</h3>
+                        <p>Long-term use of oral contraceptives (5+ years) may increase cervical cancer risk, though the risk decreases after stopping.</p>
+                        <p>Intrauterine devices (IUDs) may actually lower cervical cancer risk, though more research is needed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prevention Section -->
+    <section id="prevention" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="fw-bold">Prevention & Screening</h2>
+                    <p class="lead text-muted">How to protect yourself</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="info-card">
+                        <h3><i class="fas fa-syringe text-success me-2"></i>HPV Vaccination</h3>
+                        <p>The HPV vaccine can prevent infection with the types of HPV most likely to cause cancer. Recommended for ages 9-45.</p>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fas fa-check-circle text-success"></i></span>Nearly 100% effective against targeted HPV types</li>
+                            <li><span class="fa-li"><i class="fas fa-check-circle text-success"></i></span>Best when given before sexual activity begins</li>
+                            <li><span class="fa-li"><i class="fas fa-check-circle text-success"></i></span>Still important to get regular screenings</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="info-card">
+                        <h3><i class="fas fa-microscope text-primary me-2"></i>Regular Screening</h3>
+                        <p>Cervical cancer screening includes the Pap test and HPV test. Screening can find abnormal cells before they turn into cancer.</p>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fas fa-check-circle text-primary"></i></span>Pap test: Recommended every 3 years for women 21-65</li>
+                            <li><span class="fa-li"><i class="fas fa-check-circle text-primary"></i></span>HPV test: Can be done alone or with Pap test</li>
+                            <li><span class="fa-li"><i class="fas fa-check-circle text-primary"></i></span>Screening can prevent most cervical cancers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment Section -->
+    <section id="assessment" class="assessment-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="fw-bold">Cervical Cancer Risk Assessment</h2>
+                    <p class="lead text-muted">Evaluate your personal risk factors</p>
+                </div>
+            </div>
+            
+            <!-- Form Container -->
+            <div class="form-container">
+                <ul class="nav nav-tabs" id="formTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="demographic-tab" data-bs-toggle="tab" data-bs-target="#demographic" type="button">
+                            <i class="fas fa-user me-1"></i> Demographic
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="sexual-tab" data-bs-toggle="tab" data-bs-target="#sexual" type="button">
+                            <i class="fas fa-heart me-1"></i> Sexual History
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contraceptive-tab" data-bs-toggle="tab" data-bs-target="#contraceptive" type="button">
+                            <i class="fas fa-pills me-1"></i> Contraceptives
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="stds-tab" data-bs-toggle="tab" data-bs-target="#stds" type="button">
+                            <i class="fas fa-virus me-1"></i> STD History
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="diagnosis-tab" data-bs-toggle="tab" data-bs-target="#diagnosis" type="button">
+                            <i class="fas fa-microscope me-1"></i> Diagnosis
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="formTabsContent">
+                    <!-- Demographic Tab -->
+                    <div class="tab-pane fade show active" id="demographic" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="Age" name="Age" min="15" max="100" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Num of pregnancies" class="form-label">Number of Pregnancies</label>
+                                    <input type="number" class="form-control" id="Num of pregnancies" name="Num of pregnancies" min="0" max="20">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Smoking History</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="Smokes" class="form-label">Smokes (1=Yes, 0=No)</label>
+                                        <input type="number" class="form-control" id="Smokes" name="Smokes" min="0" max="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="Smokes (years)" class="form-label">Years Smoking</label>
+                                        <input type="number" class="form-control" id="Smokes (years)" name="Smokes (years)" min="0" max="60">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="Smokes (packs/year)" class="form-label">Packs/Year</label>
+                                        <input type="number" step="0.1" class="form-control" id="Smokes (packs/year)" name="Smokes (packs/year)" min="0" max="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sexual History Tab -->
+                    <div class="tab-pane fade" id="sexual" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Number of sexual partners" class="form-label">Number of Sexual Partners</label>
+                                    <input type="number" class="form-control" id="Number of sexual partners" name="Number of sexual partners" min="0" max="50">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="First sexual intercourse" class="form-label">Age at First Sexual Intercourse</label>
+                                    <input type="number" class="form-control" id="First sexual intercourse" name="First sexual intercourse" min="10" max="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contraceptive Tab -->
+                    <div class="tab-pane fade" id="contraceptive" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Hormonal Contraceptives (years)" class="form-label">Years of Hormonal Contraceptives</label>
+                                    <input type="number" class="form-control" id="Hormonal Contraceptives (years)" name="Hormonal Contraceptives (years)" min="0" max="50">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="IUD" class="form-label">IUD Use (1=Yes, 0=No)</label>
+                                    <input type="number" class="form-control" id="IUD" name="IUD" min="0" max="1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="IUD (years)" class="form-label">Years of IUD Use</label>
+                                    <input type="number" class="form-control" id="IUD (years)" name="IUD (years)" min="0" max="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- STD History Tab -->
+                    <div class="tab-pane fade" id="stds" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="STDs" class="form-label">History of STDs (1=Yes, 0=No)</label>
+                                    <input type="number" class="form-control" id="STDs" name="STDs" min="0" max="1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="STDs (number)" class="form-label">Number of STD Diagnoses</label>
+                                    <input type="number" class="form-control" id="STDs (number)" name="STDs (number)" min="0" max="20">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Specific STD History</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs:condylomatosis" class="form-label">Condylomatosis (1=Yes, 0=No)</label>
+                                        <input type="number" class="form-control" id="STDs:condylomatosis" name="STDs:condylomatosis" min="0" max="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs:vulvo-perineal condylomatosis" class="form-label">Vulvo-perineal Condylomatosis</label>
+                                        <input type="number" class="form-control" id="STDs:vulvo-perineal condylomatosis" name="STDs:vulvo-perineal condylomatosis" min="0" max="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs:syphilis" class="form-label">Syphilis (1=Yes, 0=No)</label>
+                                        <input type="number" class="form-control" id="STDs:syphilis" name="STDs:syphilis" min="0" max="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs:genital herpes" class="form-label">Genital Herpes (1=Yes, 0=No)</label>
+                                        <input type="number" class="form-control" id="STDs:genital herpes" name="STDs:genital herpes" min="0" max="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs:HIV" class="form-label">HIV (1=Yes, 0=No)</label>
+                                        <input type="number" class="form-control" id="STDs:HIV" name="STDs:HIV" min="0" max="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>STD Diagnosis Details</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs: Number of diagnosis" class="form-label">Number of STD Diagnoses</label>
+                                        <input type="number" class="form-control" id="STDs: Number of diagnosis" name="STDs: Number of diagnosis" min="0" max="20">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs: Time since first diagnosis" class="form-label">Years Since First Diagnosis</label>
+                                        <input type="number" class="form-control" id="STDs: Time since first diagnosis" name="STDs: Time since first diagnosis" min="0" max="50">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="STDs: Time since last diagnosis" class="form-label">Years Since Last Diagnosis</label>
+                                        <input type="number" class="form-control" id="STDs: Time since last diagnosis" name="STDs: Time since last diagnosis" min="0" max="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Diagnosis Tab -->
+                    <div class="tab-pane fade" id="diagnosis" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="Dx:CIN" class="form-label">Cervical Intraepithelial Neoplasia (CIN)</label>
+                                    <input type="number" class="form-control" id="Dx:CIN" name="Dx:CIN" min="0" max="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="Dx" class="form-label">Diagnosis (1=Yes, 0=No)</label>
+                                    <input type="number" class="form-control" id="Dx" name="Dx" min="0" max="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="Hinselmann" class="form-label">Hinselmann Test (1=Positive, 0=Negative)</label>
+                                    <input type="number" class="form-control" id="Hinselmann" name="Hinselmann" min="0" max="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="Schiller" class="form-label">Schiller Test (1=Positive, 0=Negative)</label>
+                                    <input type="number" class="form-control" id="Schiller" name="Schiller" min="0" max="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="Citology" class="form-label">Citology Result (1=Abnormal, 0=Normal)</label>
+                                    <input type="number" class="form-control" id="Citology" name="Citology" min="0" max="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 mt-4">
+                    <button class="btn btn-primary btn-lg" id="predictBtn">
+                        <i class="fas fa-chart-line me-2"></i>Assess My Risk
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Results Container -->
+            <div class="result-container" id="resultContainer">
+                <div class="text-center">
+                    <h2><i class="fas fa-clipboard-check me-2"></i>Risk Assessment Result</h2>
+                    
+                    <div class="risk-indicator">
+                        <div class="risk-icon" id="riskIcon">
+                            <i class="fas fa-shield-alt fa-3x"></i>
+                        </div>
+                        <div>
+                            <h3 id="riskLevel">Risk Level: <span id="riskText"></span></h3>
+                            <p class="text-muted">Based on your input data</p>
+                        </div>
+                    </div>
+                    
+                    <div class="my-4">
+                        <div class="progress">
+                            <div id="riskBar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p id="riskProbability">Probability: <span id="probabilityValue">0</span>%</p>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-comment-medical me-2"></i>Recommendation</h5>
+                            <p class="card-text" id="riskMessage"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 border rounded h-100">
+                                <h4><i class="fas fa-check-circle text-success me-2"></i>Low Risk</h4>
+                                <p>Indicates your current risk factors don't suggest elevated cervical cancer risk. Continue with regular screening as recommended.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded h-100">
+                                <h4><i class="fas fa-exclamation-triangle text-danger me-2"></i>High Risk</h4>
+                                <p>Doesn't mean you have cancer, but suggests you may benefit from more frequent screening or consultation with a healthcare provider.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Remember:</strong> This tool provides risk estimation only. It doesn't replace professional medical advice, diagnosis, or treatment.
+                    </div>
+                    
+                    <div class="mt-4">
+                        <button class="btn btn-outline-primary me-2" id="newAssessmentBtn">
+                            <i class="fas fa-redo me-2"></i>New Assessment
+                        </button>
+                        <button class="btn btn-outline-secondary" id="saveResultsBtn">
+                            <i class="fas fa-download me-2"></i>Save Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>©Cervical Cancer Risk Prediction System</p>
+            <p class="text-muted small">For educational purposes only. Consult a healthcare professional for medical advice.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth scrolling for navigation links
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top - 70,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+            
+            // Assessment form functionality
+            $('#predictBtn').click(function() {
+                // Validate required fields
+                let isValid = true;
+                $('[required]').each(function() {
+                    if (!$(this).val()) {
+                        $(this).addClass('is-invalid');
+                        isValid = false;
+                    } else {
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+                
+                if (!isValid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Collect all form data
+                const formData = {};
+                $('input[type="number"]').each(function() {
+                    const value = $(this).val();
+                    formData[$(this).attr('name')] = value === '' ? 0 : parseFloat(value);
+                });
+                
+                // Show loading state
+                $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                $(this).prop('disabled', true);
+                
+                // Send to server
+                $.ajax({
+                    url: '/predict',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Update UI with results
+                        const probability = (response.probability * 100).toFixed(1);
+                        $('#probabilityValue').text(probability);
+                        $('#riskBar').css('width', probability + '%').attr('aria-valuenow', probability);
+                        
+                        if (response.prediction === 1) {
+                            $('#riskText').text('High').addClass('risk-high');
+                            $('#riskIcon').html('<i class="fas fa-exclamation-triangle fa-3x text-danger"></i>');
+                            $('#riskBar').addClass('bg-danger');
+                        } else {
+                            $('#riskText').text('Low').addClass('risk-low');
+                            $('#riskIcon').html('<i class="fas fa-check-circle fa-3x text-success"></i>');
+                            $('#riskBar').addClass('bg-success');
+                        }
+                        
+                        $('#riskMessage').text(response.message);
+                        $('.form-container').hide();
+                        $('#resultContainer').fadeIn();
+                        
+                        // Reset button
+                        $('#predictBtn').html('<i class="fas fa-chart-line me-2"></i>Assess My Risk').prop('disabled', false);
+                        
+                        // Scroll to results
+                        $('html, body').animate({
+                            scrollTop: $('#resultContainer').offset().top - 70
+                        }, 500);
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.responseJSON.error);
+                        $('#predictBtn').html('<i class="fas fa-chart-line me-2"></i>Assess My Risk').prop('disabled', false);
+                    }
+                });
+            });
+            
+            $('#newAssessmentBtn').click(function() {
+                // Reset form and UI
+                $('input[type="number"]').val('');
+                $('[required]').removeClass('is-invalid');
+                $('#riskBar').css('width', '0%').removeClass('bg-danger bg-success').attr('aria-valuenow', 0);
+                $('#riskText').text('').removeClass('risk-high risk-low');
+                $('#probabilityValue').text('0');
+                $('#riskMessage').text('');
+                $('#riskIcon').html('<i class="fas fa-shield-alt fa-3x"></i>');
+                $('#resultContainer').hide();
+                $('.form-container').fadeIn();
+                
+                // Scroll to form
+                $('html, body').animate({
+                    scrollTop: $('.form-container').offset().top - 70
+                }, 500);
+            });
+            
+            $('#saveResultsBtn').click(function() {
+                alert('In a complete implementation, this would save your results or generate a PDF report.');
+            });
+        });
+    </script>
+</body>
+</html>
